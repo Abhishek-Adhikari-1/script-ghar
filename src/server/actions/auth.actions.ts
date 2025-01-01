@@ -74,17 +74,17 @@ export const loginAccount = async (
         httpOnly: true,
         sameSite: "strict",
       });
-
-      return {
-        success: {
-          session,
-          message: "Successfully logged in.",
-          statusCode: 200,
-          email: email,
-          password: password,
-        },
-      };
     }
+
+    return {
+      success: {
+        session,
+        message: "Successfully logged in.",
+        statusCode: 200,
+        email: email,
+        password: password,
+      },
+    };
   } catch (e) {
     if (e instanceof AppwriteException) {
       return {

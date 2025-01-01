@@ -52,7 +52,7 @@ export function ThemeButton() {
                 )}
               </Button>
             </TooltipTrigger>
-            <TooltipContent align="center" side="bottom" >
+            <TooltipContent align="center" side="bottom">
               <p>{name.slice(0, 1).toUpperCase() + name.slice(1)}</p>
             </TooltipContent>
           </Tooltip>

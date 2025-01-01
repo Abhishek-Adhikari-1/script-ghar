@@ -8,6 +8,7 @@ export default function Home() {
       Home Page
       <LogoutButton />
       <Link href="/sign-in">Sign In</Link>
+      <Link href="/dashboard">Go to dashboard</Link>
       <ModeToggle />
     </div>
   );
