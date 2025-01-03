@@ -1,6 +1,6 @@
 import { ForgotPasswordForm } from "./forgot-password-form";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage = async () => {
   return <ForgotPasswordForm />;
 };
 

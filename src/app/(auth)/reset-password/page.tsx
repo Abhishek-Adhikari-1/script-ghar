@@ -1,6 +1,6 @@
 import { ResetPasswordForm } from "./resetPassword-form";
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage = async () => {
   return <ResetPasswordForm />;
 };
 

@@ -1,6 +1,6 @@
 import { VerifyOTPForm } from "./verify-otp-form";
 
-const VerifyOTPPage = () => {
+const VerifyOTPPage = async () => {
   return <VerifyOTPForm />;
 };
 

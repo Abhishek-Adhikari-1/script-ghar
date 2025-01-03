@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/server/actions/auth.actions";
 

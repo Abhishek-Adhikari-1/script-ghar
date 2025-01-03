@@ -34,11 +34,11 @@ export default async function AuthLayout({
         }}
       />
       <main className="relative w-full">
-        <div className="md:pr-2 md:pt-2 pb-2">
+        <div className="md:pr-2 md:pt-2 sticky top-0 z-50 backdrop-blur-md">
           <Navbar className="md:rounded-lg shadow md:border" />
         </div>
-        <div className="w-full md:pr-2">{children}</div>
+        <div className="px-2 w-full md:px-0 md:pr-2 py-2 md:pt-4">{children}</div>
       </main>
     </SidebarProvider>
   );
-}
+} 

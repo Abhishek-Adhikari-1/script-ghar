@@ -1,6 +1,6 @@
 import React from "react";
 
-const InvoicePage = () => {
+const InvoicePage = async () => {
   return <div>InvoicePage</div>;
 };
 

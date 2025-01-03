@@ -1,6 +1,5 @@
 "use client";
 
-import { LuLayoutDashboard, LuFileStack } from "react-icons/lu";
 import {
   SidebarMenuBadge,
   SidebarMenuButton,
@@ -8,28 +7,14 @@ import {
 } from "../../ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const items = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LuLayoutDashboard,
-    isActive: true,
-    badge: "2",
-  },
-  {
-    title: "Invoices",
-    url: "/dashboard/invoices",
-    icon: LuFileStack,
-  },
-];
+import { sideBarMenuItemsList } from "@/lib/menu-items";
 
 const SideBarItem = () => {
   const pathname = usePathname();
 
   return (
     <>
-      {items.map((item) => (
+      {sideBarMenuItemsList.map((item) => (
         <SidebarMenuItem key={item.title}>
           <SidebarMenuButton asChild isActive={item?.url === pathname}>
             <Link href={item.url}>

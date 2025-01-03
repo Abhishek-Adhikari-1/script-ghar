@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import SideTriggerMbl from "../sidebar/sidebar-trigger-mobile";
 
-const Navbar = ({ className }: { className?: string }) => {
+const Navbar = async ({ className }: { className?: string }) => {
   return (
     <div
       className={cn("bg-card", className)}
@@ -46,7 +46,7 @@ const Navbar = ({ className }: { className?: string }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>
-                  <IoNotificationsOutline className="w-5 h-5" />
+                  <AiOutlineNotification className="w-5 h-5" />
                 </div>
               </TooltipTrigger>
               <TooltipContent>
@@ -59,7 +59,7 @@ const Navbar = ({ className }: { className?: string }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>
-                  <AiOutlineNotification className="w-5 h-5" />
+                  <IoNotificationsOutline className="w-5 h-5" />
                   <span className="absolute select-none -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full text-white flex justify-center items-center text-[11px]">
                     5
                   </span>

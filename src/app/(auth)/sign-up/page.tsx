@@ -1,7 +1,7 @@
 import React from "react";
 import { SignUpForm } from "./sign-up-form";
 
-const SignUpPage = async() => {
+const SignUpPage = async () => {
   return (
     <>
       <SignUpForm />
