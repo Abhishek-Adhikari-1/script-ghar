@@ -20,7 +20,7 @@ interface CardContentProps {
   isPending: boolean;
 }
 
-export const CardWrapper = async ({
+export const CardWrapper = ({
   children,
   title = "Title",
   description,
