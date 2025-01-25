@@ -95,3 +95,50 @@ export const resetPasswordFormSchema = z
     message: "Passwords must be same.",
     path: ["confirmPassword"],
   });
+
+export const buySellFormSchema = z.object({
+  action: z.coerce
+    .number()
+    .refine((val) => val === 1 || val === 0 || val === 2, {
+      message: "Value must be 0 or 2",
+    }),
+  quantity: z.coerce
+    .number()
+    .min(10, { message: "Quantity must be at least 10." })
+    .superRefine((value, ctx) => {
+      if (value % 10 !== 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Quantity must be a multiple of 10.",
+        });
+      }
+    }),
+  price: z.coerce.number().refine((value) => value > 0, {
+    message: "Price must be positive.",
+  }),
+});
+
+// superRefine((value, ctx) => {
+//   const number = parseInt(value, 10);
+//   if (isNaN(number)) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//     });
+//     return;
+//   }
+//   if (number < 10) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: "Quantity must be at least 10.",
+//     });
+//   } else if (number % 10 !== 0) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: "Quantity must be a multiple of 10.",
+//     });
+//   }
+// });
+// .refine((value) => value % 10 == 0, {
+//   message: "Quantity must be a multiple of 10.",
+//   path: ["quantity"],
+// }),

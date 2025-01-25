@@ -1,3 +1,4 @@
+import { envVariables } from "./../../../lib/appwrite/config";
 import { createAdminClient } from "@/lib/appwrite";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -16,5 +17,5 @@ export async function GET(request: NextRequest) {
     secure: true,
   });
 
-  return NextResponse.redirect(`${request.nextUrl.origin}/`);
+  return NextResponse.redirect(`${envVariables.homepageUrl}/`);
 }

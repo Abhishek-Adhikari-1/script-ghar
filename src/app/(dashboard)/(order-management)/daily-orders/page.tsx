@@ -1,5 +1,11 @@
+import OrderTable from "@/components/order-history/order-table";
+
 const DailyOrdersPage = async () => {
-  return <div>DailyOrdersPage</div>;
+  return (
+    <div>
+      <OrderTable />
+    </div>
+  );
 };
 
 export default DailyOrdersPage;

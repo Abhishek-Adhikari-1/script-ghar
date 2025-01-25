@@ -18,7 +18,7 @@ import {
   generateSecretCode,
   getTimeAfterFiveMinutes,
 } from "../utils.actions";
-import { appwriteConfig } from "@/lib/appwrite/config";
+import { appwriteConfig, envVariables } from "@/lib/appwrite/config";
 
 export const loginAccount = async (
   values: z.infer<typeof signInFormSchema>
@@ -50,7 +50,7 @@ export const loginAccount = async (
       account.createMagicURLToken(
         userList.users[0].$id,
         email,
-        process.env.APP_VERIFY_URL!,
+        envVariables.homepageUrl!,
         true
       );
       return {
@@ -148,7 +148,7 @@ export const createAccount = async (
     await account.createMagicURLToken(
       session.$id,
       session.email,
-      process.env.APP_VERIFY_URL!,
+      envVariables.homepageUrl!,
       true
     );
 

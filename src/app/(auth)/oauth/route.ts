@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/appwrite";
+import { envVariables } from "@/lib/appwrite/config";
 
 export async function GET(request: NextRequest) {
   const userId = request.nextUrl.searchParams.get("userId")!;
@@ -16,5 +17,5 @@ export async function GET(request: NextRequest) {
     secure: true,
   });
 
-  return NextResponse.redirect(`${request.nextUrl.origin}/`);
+  return NextResponse.redirect(`${envVariables.homepageUrl}/`);
 }

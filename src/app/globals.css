@@ -7,6 +7,10 @@ body {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -93,3 +97,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+#three-toggler > :nth-last-child(1) {
+  transition: left 0.3s ease-in-out;
+}
+

@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/appwrite";
+import { envVariables } from "@/lib/appwrite/config";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     await users.updateLabels(user.userId, ["user"]);
 
-    const response = NextResponse.redirect(`${request.nextUrl.origin}/`);
+    const response = NextResponse.redirect(`${envVariables.homepageUrl}/`);
     response.cookies.set("session", user.secret, {
       path: "/",
       httpOnly: true,
@@ -23,6 +24,6 @@ export async function GET(request: NextRequest) {
 
     return response;
   } catch (error) {
-    if (error) return NextResponse.redirect(`${request.nextUrl.origin}/`);
+    if (error) return NextResponse.redirect(`${envVariables.homepageUrl}/`);
   }
 }

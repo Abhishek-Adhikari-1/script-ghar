@@ -1,6 +1,6 @@
 "use client";
 
-import { LuLayoutDashboard, LuFileStack } from "react-icons/lu";
+import { LuLayoutDashboard, LuUserRound } from "react-icons/lu";
 import { RiExchangeDollarLine } from "react-icons/ri";
 import { GoListOrdered } from "react-icons/go";
 import { MdManageHistory } from "react-icons/md";
@@ -15,9 +15,9 @@ export const sideBarMenuItemsList = [
     badge: "2",
   },
   {
-    title: "Invoices",
-    url: "/invoices",
-    icon: LuFileStack,
+    title: "My Information",
+    url: "/client-information",
+    icon: LuUserRound,
   },
 ];
 
