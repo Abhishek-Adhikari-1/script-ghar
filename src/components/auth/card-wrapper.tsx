@@ -31,7 +31,7 @@ export const CardWrapper = ({
   isPending,
 }: CardContentProps) => {
   return (
-    <Card className="mx-auto max-w-sm sm:w-full shadow-2xl">
+    <Card className="mx-auto max-w-sm w-full shadow-2xl">
       <CardHeader className="pb-4">
         <CardTitle className="text-2xl">{title}</CardTitle>
         {description && <CardDescription>{description}</CardDescription>}

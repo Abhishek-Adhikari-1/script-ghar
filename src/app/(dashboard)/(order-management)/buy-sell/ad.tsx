@@ -9,7 +9,6 @@ export function ShadcnStyleSliderToggle() {
 
   const handleValueChange = (newValue: number[]) => {
     setValue(newValue[0]);
-    console.log(newValue);
   };
 
   return (

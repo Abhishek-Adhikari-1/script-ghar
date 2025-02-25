@@ -30,6 +30,7 @@ export async function AppSidebar({
     name: string;
     email: string;
     roles: string[];
+    avatar?: string;
   };
   variant?: "sidebar" | "floating" | "inset";
 }) {
@@ -51,7 +52,7 @@ export async function AppSidebar({
           <SidebarGroupLabel>Applications</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SideBarItem />
+              <SideBarItem roles={user.roles}/>
             </SidebarMenu>
           </SidebarGroupContent>
           <SideBarDropdownMenu

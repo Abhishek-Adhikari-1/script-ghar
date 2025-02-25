@@ -8,8 +8,9 @@ export const appwriteConfig = {
   transcationDatabaseId: process.env.APPWRITE_TRANSCATIONDB_DATABASE_ID!,
   ordersCollectionId: process.env.APPWRITE_ORDERS_COLLECTION_ID!,
   scripsListCollectionId: process.env.APPWRITE_SCRIPS_LIST_COLLECTION_ID!,
+  userInfoCollectionId: process.env.APPWRITE_USER_INFO_COLLECTION_ID!,
 };
 
 export const envVariables = {
-  homepageUrl: process.env.APP_HOMEPAGE_URL
-}
+  homepageUrl: process.env.APP_HOMEPAGE_URL!,
+};

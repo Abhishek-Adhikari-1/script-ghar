@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
+import { getLoggedInUser } from "@/server/actions/user.actions";
+import { AuthProvider } from "@/hooks/AuthContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -15,16 +18,24 @@ export const metadata: Metadata = {
   description: "Made by Abhishek Adhikari",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const getUser = await getLoggedInUser();
+  const currentUser = getUser?.success ? getUser?.user : undefined;
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.variable} --font-poppins antialiased relative bg-background`}>
+      <body
+        className={`${poppins.variable} --font-poppins antialiased relative bg-background`}
+        suppressHydrationWarning
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <EdgeStoreProvider>
+            <AuthProvider initialUser={currentUser}>{children}</AuthProvider>
+          </EdgeStoreProvider>
         </ThemeProvider>
       </body>
     </html>

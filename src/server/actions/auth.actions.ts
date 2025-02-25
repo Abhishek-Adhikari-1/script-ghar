@@ -50,7 +50,7 @@ export const loginAccount = async (
       account.createMagicURLToken(
         userList.users[0].$id,
         email,
-        envVariables.homepageUrl!,
+        `${envVariables.homepageUrl}/verify-newaccount`,
         true
       );
       return {
@@ -137,18 +137,30 @@ export const createAccount = async (
     }
 
     // Creating new user with given email and password
-    const session = await account.create(
-      ID.unique(),
-      email,
-      password,
-      `${firstName} ${lastName}`
-    );
+    // const session = await account.create(
+    //   ID.unique(),
+    //   email,
+    //   password,
+    //   `${firstName} ${lastName}`
+    // );
+
+    // await account.updatePrefs({
+    //   firstName: firstName,
+    //   lastName: lastName,
+    // });
+
+    const session = await account
+      .create(ID.unique(), email, password, `${firstName} ${lastName}`)
+      .then(async (response) => {
+        await users.updatePrefs(response.$id, { firstName, lastName });
+        return response;
+      });
 
     // Sending verification email to the user MAGIC URL
     await account.createMagicURLToken(
       session.$id,
       session.email,
-      envVariables.homepageUrl!,
+      `${envVariables.homepageUrl}/verify-newaccount`,
       true
     );
 
@@ -668,7 +680,7 @@ export const changeForgotPassword = async (
       };
 
     // If user exists in the database
-    if (total > 0 || AuthenticatorAssertionResponse.length > 0) {
+    if (total > 0 || auth.length > 0) {
       // If secret code did not match
       if (auth[0].secret !== decodedPin) {
         cookieStore.delete("npw");

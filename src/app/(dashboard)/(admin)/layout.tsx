@@ -1,10 +1,9 @@
-import { ModeToggle } from "@/components/theme/theme-toggle";
 import { getLoggedInUser } from "@/server/actions/user.actions";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Auth || Abhishek",
+  title: "Admin || Dashboard || Abhishek",
   description: "Made by abhishek adhikari",
 };
 
@@ -16,18 +15,11 @@ export default async function AuthLayout({
   const getUser = await getLoggedInUser();
   const currentUser = getUser?.success ? getUser?.user : null;
 
-  if (currentUser) {
-    return redirect("/");
-  }
+  if (
+    !currentUser?.labels.includes("mvp") &&
+    !currentUser?.labels.includes("admin")
+  )
+    return redirect("/dashboard");
 
-  return (
-    <main className="w-full h-full">
-      <div className="absolute right-3 top-3">
-        <ModeToggle />
-      </div>
-      <div className="h-full flex justify-center items-center mx-2">
-        {children}
-      </div>
-    </main>
-  );
+  return <>{children}</>;
 }

@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { ForgotPasswordFormProps } from "./forgot-password-form";
 import { forgotPasswordPhoneFormSchema } from "@/lib/zod-auth-schema";
 import { forgotPasswordPhone } from "@/server/actions/auth.actions";
+import { PhoneInput } from "@/components/client-information/phone-input";
 
 export const ForgotPasswordPhoneForm = ({
   setToggleFormState,
@@ -101,13 +102,23 @@ export const ForgotPasswordPhoneForm = ({
                   </Button>
                 </div>
                 <FormControl>
-                  <Input
-                    placeholder="98 XXXX XXXX"
-                    type="number"
-                    className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    disabled={isPending}
+                  <PhoneInput
+                    id="phone"
+                    type="phone"
+                    autoComplete={"tel"}
+                    defaultCountry="NP"
+                    placeholder={"98 XXXX XXXX"}
                     {...field}
                   />
+                  {/* <Input
+                      placeholder={"98 XXXX XXXX"}
+                      type="number"
+                      className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      disabled={isPending}
+                      readOnly={!editMode}
+                      autoComplete={"tel"}
+                      {...field}
+                    /> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>

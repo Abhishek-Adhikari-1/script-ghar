@@ -20,20 +20,20 @@ export const menuItems = [
     icon: FiUser,
     label: "Profile",
     href: "/profile",
-    visible: ["admin", "user", "broker"],
+    visible: ["mvp", "admin", "user", "broker"],
     badge: true,
   },
   {
     icon: FiSettings,
     label: "Settings",
     href: "/settings",
-    visible: ["admin", "user", "broker"],
+    visible: ["mvp", "admin", "user", "broker"],
   },
   {
     icon: FiHelpCircle,
     label: "Help",
     href: "/help",
-    visible: ["admin", "user", "broker"],
+    visible: ["mvp", "admin", "user", "broker"],
   },
 ];
 

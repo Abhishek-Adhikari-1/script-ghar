@@ -1,12 +1,11 @@
 import { ProfilePage } from "@/components/client-information/profile-page";
-import React from "react";
 
-const ClientInformation = () => {
+const Profile = () => {
   return (
     <div>
-      <ProfilePage />
+      <ProfilePage newUser={true} />
     </div>
   );
 };
 
-export default ClientInformation;
+export default Profile;

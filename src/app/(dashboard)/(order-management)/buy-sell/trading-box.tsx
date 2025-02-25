@@ -40,7 +40,15 @@ import {
   searchSelectedScrip,
   submitScripBuySell,
 } from "@/server/order-management/buy-sell.trade";
-import OrderTable from "@/components/order-history/order-table";
+import { BuySellTable } from "@/components/order-history/order-table";
+
+export type PropSelectedOrders = {
+  // sell: { action: string; quantity: number; price: number }[];
+  // buy: { action: string; quantity: number; price: number }[];
+  action: string;
+  quantity: number;
+  price: number;
+}[];
 
 function TradingFormContent() {
   const { theme, setThemeByMode } = useBuySellTheme();
@@ -50,15 +58,31 @@ function TradingFormContent() {
   const [selectedStatus, setSelectedStatus] =
     React.useState<ScripStatus | null>(null);
   const [currentPrice, setCurrentPrice] = React.useState<number | null>(0);
+  const [selectedOrders, setSelectedOrders] =
+    React.useState<PropSelectedOrders | null>(null);
 
   React.useEffect(() => {
     const fetchingData = async () => {
+      setSelectedOrders([]);
       const res = await searchSelectedScrip(selectedStatus);
 
       if (res?.success) {
         // setSelectedStatus(res?.data ? res.data[0] : null);
         setCurrentPrice(res?.data ? res.data[0].currentPrice : null);
-        console.log(res);
+
+        // if (
+        //   res?.orders &&
+        //   (res.orders.buy.length > 0 || res.orders.sell.length > 0)
+        // ) {
+        //   setSelectedOrders({
+        //     sell: res.orders.sell,
+        //     buy: res.orders.buy,
+        //   });
+        // }
+
+        if (res?.orders) {
+          setSelectedOrders(res.orders);
+        }
       }
     };
     fetchingData();
@@ -76,7 +100,6 @@ function TradingFormContent() {
   function onSubmit(values: z.infer<typeof buySellFormSchema>) {
     startTransition(async () => {
       const response = await submitScripBuySell(values, selectedStatus);
-      console.log(response);
 
       if (response?.error) {
         if (response?.error?.cause == "SELECTED_SCRIP_NULL") {
@@ -182,7 +205,7 @@ function TradingFormContent() {
                 <div className="space-y-2">
                   <Label>FATHER&apos;S NAME</Label>
                   <Input
-                    defaultValue="Bishnu Prasad Adhikari"
+                    defaultValue="Ram Bahadur"
                     readOnly
                     tabIndex={-1}
                   />
@@ -299,7 +322,8 @@ function TradingFormContent() {
                 </div>
               </div>
             </div>
-            <OrderTable />
+            {selectedOrders && <BuySellTable data={selectedOrders} />}
+            {/* <OrderTable /> */}
           </CardContent>
         </Card>
       </form>

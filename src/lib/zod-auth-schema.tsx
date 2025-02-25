@@ -69,17 +69,10 @@ export const forgotPasswordEmailFormSchema = signInFormSchema.pick({
 });
 
 export const forgotPasswordPhoneFormSchema = z.object({
-  phone: z
-    .string()
-    .min(10, { message: "Phone number must be 10 digits." })
-    .max(10, { message: "Phone number must not exceed 10 digits." })
-    .refine(
-      (value) => {
-        const number = parseInt(value, 10);
-        return !isNaN(number) && number >= 0;
-      },
-      { message: "Phone number must be a positive number." }
-    ),
+  phone: z.string().regex(/^\+\d{10,15}$/, {
+    message:
+      "Phone number must include country code and be between 10 to 15 digits.",
+  }),
 });
 
 export const resetPasswordFormSchema = z
@@ -118,27 +111,43 @@ export const buySellFormSchema = z.object({
   }),
 });
 
-// superRefine((value, ctx) => {
-//   const number = parseInt(value, 10);
-//   if (isNaN(number)) {
-//     ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//     });
-//     return;
-//   }
-//   if (number < 10) {
-//     ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message: "Quantity must be at least 10.",
-//     });
-//   } else if (number % 10 !== 0) {
-//     ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message: "Quantity must be a multiple of 10.",
-//     });
-//   }
-// });
-// .refine((value) => value % 10 == 0, {
-//   message: "Quantity must be a multiple of 10.",
-//   path: ["quantity"],
-// }),
+export const profileInformationSchema = z.object({
+  firstName: z
+    .string()
+    .trim()
+    .min(2, {
+      message: "Enter your first name.",
+    })
+    .max(20, {
+      message: "Use shorter first name.",
+    })
+    .regex(/^[A-Za-z]+$/, {
+      message: "First name must contain only letters.",
+    }),
+  lastName: z
+    .string()
+    .trim()
+    .min(2, {
+      message: "Enter your last name.",
+    })
+    .max(20, {
+      message: "Use shorter last name.",
+    })
+    .regex(/^[A-Za-z]+$/, {
+      message: "Last name must contain only letters.",
+    }),
+  email: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Email is required.",
+    })
+    .email({
+      message: "Please enter a valid email address.",
+    }),
+  phone: z.string().regex(/^\+\d{10,15}$/, {
+    message:
+      "Phone number must include country code and be between 10 to 15 digits.",
+  }),
+  imageUrl: z.string().optional(),
+});

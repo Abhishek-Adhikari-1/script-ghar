@@ -59,7 +59,7 @@ export const submitScripBuySell = async (
 
     if (!user) new Error("User not found");
 
-    const { documents: order } = await databases.createDocument(
+    await databases.createDocument(
       appwriteConfig.transcationDatabaseId,
       appwriteConfig.ordersCollectionId,
       ID.unique(),
@@ -127,6 +127,12 @@ export const searchSelectedScrip = async (
       };
     }
 
+    const { documents: orders } = await databases.listDocuments(
+      appwriteConfig.transcationDatabaseId,
+      appwriteConfig.ordersCollectionId,
+      [Query.equal("scripId", selectedStatus.id), Query.equal("status", "open")]
+    );
+
     return {
       success: true,
       scrips,
@@ -135,6 +141,33 @@ export const searchSelectedScrip = async (
         id: $id,
         currentPrice,
       })),
+      // orders: {
+      //   sell: Array.isArray(orders)
+      //     ? orders
+      //         .filter((order) => order.action === "sell")
+      //         .map(({ action, quantity, price }) => ({
+      //           action,
+      //           quantity,
+      //           price,
+      //         }))
+      //     : [],
+      //   buy: Array.isArray(orders)
+      //     ? orders
+      //         .filter((order) => order.action === "buy")
+      //         .map(({ action, quantity, price }) => ({
+      //           action,
+      //           quantity,
+      //           price,
+      //         }))
+      //     : [],
+      // },
+      orders: Array.isArray(orders)
+        ? orders.map(({ action, quantity, price }) => ({
+            action,
+            quantity,
+            price,
+          }))
+        : [],
     };
   } catch (error) {
     if (error)
